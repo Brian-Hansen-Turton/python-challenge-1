@@ -13,24 +13,18 @@ order_item_name_key = "Item name"
 order_item_price_key = "Price"
 order_item_quanity_key = "Quanity" 
 
-def add_to_order(list, name, price, quanity):
-
-    if len(list) == 0:
-        list.append({order_item_name_key: name,
-                     order_item_price_key: price,
-                     order_item_quanity_key: quanity}) 
-
-    for index, item in enumerate(list):
-        if item[order_item_name_key] == name:
-            print("all ready in list")
-            new_quanity = quanity * item[order_item_quanity_key]
-            list[index] = ({order_item_name_key: name,
-                 order_item_price_key: price,
-                 order_item_quanity_key: new_quanity})
-            print(f"{list}")
-        else:
-            list.append({order_item_name_key: name,
-                        order_item_price_key: price,
-                        order_item_quanity_key: quanity})  
-    print(f"{list}")
+# add new items to the list, or upate quanity if 
+# item is already in the list
+def add_or_update_item(list, name, price, quanity):
+    new_item = {order_item_name_key: name,
+                order_item_price_key: price,
+                order_item_quanity_key: quanity}
+    
+    for item in list:
+        if item[order_item_name_key] == new_item[order_item_name_key]:
+            item[order_item_quanity_key] += new_item[order_item_quanity_key]
+            break
+    else:
+        list.append(new_item)
+        
     return list    

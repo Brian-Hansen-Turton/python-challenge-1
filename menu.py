@@ -138,41 +138,32 @@ while place_order:
                 # 4. Check if the menu selection is in the menu items
 
                 if item_order_number in menu_items:
-                    # Store the item name as a variable
 
+                    # Store the item name as a variable
                     item_name = menu[menu_category_name]
                     # Ask the customer for the quantity of the menu item
-
                     quanity = input(f'How many {menu_items[item_order_number][name_key]} would you like to order? ')
 
                     # Check if the quantity is a number, default to 1 if not
                     if quanity.isdigit():
-                        quanity = max(int(quanity), 1)
-
-                    # Add the item name, price, and quantity to the order list
-                    order_list.append({name_key: menu_items[item_order_number][name_key],
-                                       price_key: menu_items[item_order_number][price_key],
-                                       quanity_key: quanity})   
+                        quanity = max(int(quanity), 1) 
                            
-                    # order_list = menu_helpers.add_to_order(
-                    #     order_list,
-                    #     menu_items[item_order_number][name_key],
-                    #     menu_items[item_order_number][price_key],
-                    #     quanity)
-                        
-                        #print(f"This is the order list - {order_list}")
-                    for order in order_list:
-                        print(f"{order}")
+                        order_list = menu_helpers.add_or_update_item(
+                            order_list,
+                            menu_items[item_order_number][name_key],
+                            menu_items[item_order_number][price_key],
+                            quanity)
+                    
+                    else:
+                         # Tell the customer that their input isn't valid
+                        print(f"Not a valid item {quanity}")
 
-                    # Tell the customer that their input isn't valid
-                else:
-                    print(f"Not a valid item {quanity}")
                 # Tell the customer they didn't select a menu option
+                else:
+                    print(f"{item_order_number} is not a valid selection")
             else:
-                print(f"{item_order_selection} is not a valid selection")
-        else:
-            # Tell the customer they didn't select a menu option
-            print(f"{menu_category} was not a menu option.")
+                # Tell the customer they didn't select a menu option
+                print(f"{menu_category} was not a menu option.")
     else:
         # Tell the customer they didn't select a number
         print("You didn't select a number.")
@@ -188,19 +179,19 @@ while place_order:
         else:
              # Exit the keep ordering question loop
             place_order = False
-            break
 
-
-                # Complete the order
+             # Complete the order
 
                 # Since the customer decided to stop ordering, thank them for
                 # their order
 
-                # Exit the keep ordering question loop
-        
+            menu_helpers.clear_console()
+            print("Thank you for your order")    
 
-                # Tell the customer to try again
+            # Exit the keep ordering question loop
+            break
 
+            # Tell the customer to try again
 
 # Print out the customer's order
 menu_helpers.clear_console()
