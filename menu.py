@@ -198,7 +198,7 @@ print("\nThis is what we are preparing for you.\n")
 #print(order_list)
 
 # the width of each column
-name_width = 26
+name_width = 22
 price_width = 8
 quanity_width = 10
 
