@@ -1,15 +1,20 @@
 # UPENN-VIRT-AI-PT-07-2024-U-LOLC - Module 2 Challenge
+https://github.com/Brian-Hansen-Turton/python-challenge-1.git
+git@github.com:Brian-Hansen-Turton/python-challenge-1.git
+
+**Note:**
+- All additional code contributions to the starter code were authored by Brian Hansen-Turton.
 
 ## Project Overview
 
-This project is a Python-based console application designed to simulate a food truck ordering system. The program presents a menu to the customer, allows them to select items from various categories, and calculates the total cost of the selected items. The goal of this project is to practice working with dictionaries, loops, and conditional statements in Python.
+This project is a Python-based console application designed to simulate a food truck ordering system. The program presents a menu to the customer, allows them to select items from various categories, and calculates the total cost of the selected items.
 
 ## How to Use
 
 1. **Run the Program:** Start the application by running the Python script.
 2. **Select Menu Category:** The program will display the main menu categories. Select the category from which you want to order by typing the corresponding number.
 3. **Select Items:** Once a category is selected, the program will display the items in that category with their prices. Choose the item you want by typing the corresponding number.
-4. **Specify Quantity:** After selecting an item, you will be prompted to enter the quantity. If the input is invalid, the program defaults to a quantity of 1.
+4. **Specify Quantity:** After selecting an item, you will be prompted to enter the quantity. If the input is invalid, the input defaults to a quantity of 1.
 5. **Continue or Complete Order:** After selecting an item, you can choose to continue ordering or finalize your order.
 6. **View Order Summary:** Once the order is completed, the program will display a summary of all ordered items and the total cost.
 
@@ -48,3 +53,6 @@ Item name                  | Price  | Quantity
 Teriyaki Chicken           | $9.99  | 2
 
 The total cost of all times is $19.98
+
+
+
