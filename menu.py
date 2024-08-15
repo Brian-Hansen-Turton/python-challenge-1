@@ -229,7 +229,6 @@ for order in order_list:
     # 8. Calculate the number of spaces for formatted printing
     name_space_count = name_width - len(name)
     price_space_count = price_width - len(str(price))
-    quanity_space_count = quanity_width - len(str(quanity))
     # 9. Create space strings
     name_spaces = " " * name_space_count
     price_spaces = " " * price_space_count
