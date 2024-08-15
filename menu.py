@@ -89,7 +89,7 @@ while place_order:
         i += 1
 
     # Get the customer's input
-    menu_selection = input("Type menu number: ")
+    menu_selection = input("Please select an item from the menu by number: ")
 
     # Check if the customer's input is a number
     if menu_selection.isdigit():
@@ -110,18 +110,18 @@ while place_order:
                 # Check if the menu item is a dictionary to handle differently
                 if type(value) is dict:
                     for key2, value2 in value.items():
-                        num_item_spaces = 24 - len(key + key2) - 3
-                        item_spaces = " " * num_item_spaces
-                        print(f"{i}      | {key} - {key2}{item_spaces} | ${value2}")
+                        name_space_count = 24 - len(key + key2) - 3
+                        name_spaces = " " * name_space_count
+                        print(f"{i}      | {key} - {key2}{name_spaces} | ${value2}")
                         menu_items[i] = {
                             name_key: key + " - " + key2,
                             price_key: value2
                         }
                         i += 1
                 else:
-                    num_item_spaces = 24 - len(key)
-                    item_spaces = " " * num_item_spaces
-                    print(f"{i}      | {key}{item_spaces} | ${value}")
+                    name_space_count = 24 - len(key)
+                    name_spaces = " " * name_space_count
+                    print(f"{i}      | {key}{name_spaces} | ${value}")
                     menu_items[i] = {
                         name_key: key,
                         price_key: value
@@ -139,10 +139,11 @@ while place_order:
                 # 4. Check if the menu selection is in the menu items
                 if item_order_number in menu_items:
                     # Store the item name as a variable
-                    item_name = menu[menu_category_name]
+                    name = menu[menu_category_name]
                     # Ask the customer for the quantity of the menu item
                     quanity = input(f'How many {menu_items[item_order_number][name_key]} would you like to order? The default is 1. ')
                     # Check if the quantity is a number, default to 1 if not
+                    # Using a ternary operation
                     quanity = int(quanity) if quanity.isdigit() else 1
 
                     order_list = utility.add_or_update_item(
@@ -168,10 +169,10 @@ while place_order:
 
     while True:
         # Ask the customer if they would like to order anything else
-        order_more = input("Would you like to keep ordering? (Y)es or (N)o ")
+        keep_ordering = input("Would you like to keep ordering? (Y)es or (N)o ")
 
         # 5. Check the customer's input
-        match order_more.lower():
+        match keep_ordering.lower():
             case 'y':
                 # Keep ordering
                 place_order = True
@@ -186,7 +187,7 @@ while place_order:
                 break
 
             case _:
-                 print(f"Sorry, {order_more} is an invalid selection please try again.")
+                 print(f"Sorry, {keep_ordering} is an invalid selection please try again.")
 
             # Tell the customer to try again
 
@@ -196,25 +197,48 @@ print("\nThis is what we are preparing for you.\n")
 # Uncomment the following line to check the structure of the order
 #print(order_list)
 
-print("Item name                 | Price  | Quantity")
-print("--------------------------|--------|----------")
+# the width of each column
+name_width = 26
+price_width = 8
+quanity_width = 10
+
+# number of - in the header section
+name_dash = "-" * name_width
+price_dash = "-" * price_width
+quanity_dash = "-" * quanity_width
+
+# header column strings
+header_name = "Item name"
+header_price = " Price"
+header_quanity = " Quantity"
+
+# header item spacing
+header_name_space = " " * (name_width - len(header_name))
+header_price_space = " " * (price_width - len(header_price))
+
+# print the table header
+print(f"{header_name}{header_name_space}|{header_price}{header_price_space}|{header_quanity}")
+print(f"{name_dash}|{price_dash}|{quanity_dash}")
 
 # 6. Loop through the items in the customer's order
 for order in order_list:
     # 7. Store the dictionary items as variables
-    item_name = order[name_key]
-    item_price = order[price_key]
-    item_quanity = order[quanity_key]
+    name = order[name_key]
+    price = f" ${order[price_key]:,.2f}"
+    quanity = f" {order[quanity_key]}"
     # 8. Calculate the number of spaces for formatted printing
-    num_item_spaces = 26 - len(item_name)
+    name_space_count = name_width - len(name)
+    price_space_count = price_width - len(str(price))
+    quanity_space_count = quanity_width - len(str(quanity))
     # 9. Create space strings
-    item_spaces = " " * num_item_spaces
+    name_spaces = " " * name_space_count
+    price_spaces = " " * price_space_count
     # 10. Print the item name, price, and quantity
-    print(f"{item_name}{item_spaces}| ${item_price}  | {item_quanity}")
+    print(f"{name}{name_spaces}|{price}{price_spaces}|{quanity}")
 
 # 11. Calculate the cost of the order using list comprehension
 # Multiply the price by quantity for each item in the order list, then sum()
 # and print the prices.
 all_item_cost = [(item[price_key] * order[quanity_key]) for item in order_list]
 total_cost = sum(all_item_cost)
-print(f"\nThe total cost of all times is ${total_cost:.2f}\n")
+print(f"\nThe total cost of all times is ${total_cost:,.2f}\n")
