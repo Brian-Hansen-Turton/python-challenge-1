@@ -143,19 +143,18 @@ while place_order:
                     # Ask the customer for the quantity of the menu item
                     quanity = input(f'How many {menu_items[item_order_number][name_key]} would you like to order? The default is 1. ')
                     # Check if the quantity is a number, default to 1 if not
-                    if quanity.isdigit():
-                        quanity = max(int(quanity), 1) 
-                        # Utility 
-                        order_list = utility.add_or_update_item(
-                            order_list,
-                            menu_items[item_order_number][name_key],
-                            menu_items[item_order_number][price_key],
-                            quanity)
+                    quanity = int(quanity) if quanity.isdigit() else 1
+
+                    order_list = utility.add_or_update_item(
+                        order_list,
+                        menu_items[item_order_number][name_key],
+                        menu_items[item_order_number][price_key],
+                        quanity)
                     
-                    # Tell the customer that their input isn't valid
-                    else:
-                        print(f"Not a valid item {quanity}")
-                # Tell the customer they didn't select a menu option
+                # Tell the customer that their input isn't valid
+                else:
+                    print(f"Not a valid item {item_order_selection}")
+            # Tell the customer they didn't select a menu option
             else:
                 print(f"{item_order_selection} is not a valid selection")
 
@@ -187,12 +186,11 @@ while place_order:
                 break
 
             case _:
-                 print(f"Sorry, {order_more} was an invalid selection please try again.")
+                 print(f"Sorry, {order_more} is an invalid selection please try again.")
 
             # Tell the customer to try again
 
 # Print out the customer's order
-utility.clear_console()
 print("\nThis is what we are preparing for you.\n")
 
 # Uncomment the following line to check the structure of the order
